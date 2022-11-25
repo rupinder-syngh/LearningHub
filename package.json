@@ -1,0 +1,47 @@
+{
+  "name": "learninghub",
+  "version": "1.0.0",
+  "description": "This is a centralized platform for learning and assessment",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./src/**/*.test.js && exit 1",
+    "start": "eslint --fix './src/**/*.js' && node ./src/index.js"
+  },
+  "author": "Rupinder Singh",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "config": "^3.3.8",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20",
+    "uuid": "^9.0.0",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "mocha": "^10.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rupinder-syngh/LearningHub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rupinder-syngh/LearningHub/issues"
+  },
+  "homepage": "https://github.com/rupinder-syngh/LearningHub#readme"
+}
