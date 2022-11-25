@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
-const user = require('../../models/user');
+const User = require('../../models/user');
 const getUuid = require('../../utils/getUuid');
 const sendEmail = require('../../services/sendEmail');
 const constants = require('../../../config/constants');
@@ -21,7 +21,7 @@ const signup = async (req, res) => {
         const passwordHash = await bcrypt.hash(userData.password, 10);
         userData.password = passwordHash;
         userData.emailVerificationToken = await getUuid();
-        userData.savedUser = await user.create(userData);
+        userData.savedUser = await User.create(userData);
 
         /* Info: email integration */
         const emailMsg = constants.email.verifyEmail(
@@ -52,11 +52,11 @@ const signup = async (req, res) => {
 const verifyEmail = async (req, res) => {
     try {
         const { token } = req.params;
-        const userData = await user.findOne({ emailVerificationToken: token });
+        const userData = await User.findOne({ emailVerificationToken: token });
         if (!userData) {
             throw new Error('Invalid verification token!');
         } else {
-            await user.updateOne({ emailVerificationToken: token }, { $set: { isVerified: true } });
+            await User.updateOne({ emailVerificationToken: token }, { $set: { isVerified: true } });
         }
         res.status(200).json({
             message: 'Email verified successfully!',
