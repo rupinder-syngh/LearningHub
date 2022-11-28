@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const { validationResult } = require('express-validator');
 const User = require('../../models/user');
 const getUuid = require('../../utils/getUuid');
 const sendEmail = require('../../services/sendEmail');
@@ -9,13 +8,6 @@ const logger = require('../../utils/logger');
 
 const signup = async (req, res) => {
     try {
-        /* Info: input validation */
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            logger.error({ errors: errors.array() });
-            return res.status(400).json({ errors: errors.array() });
-        }
-
         /* Info: user creation */
         const userData = req.body;
         const passwordHash = await bcrypt.hash(userData.password, 10);
@@ -58,13 +50,13 @@ const verifyEmail = async (req, res) => {
         } else {
             await User.updateOne({ emailVerificationToken: token }, { $set: { isVerified: true } });
         }
-        res.status(200).json({
+        return res.status(200).json({
             message: 'Email verified successfully!',
             data: {},
         });
     } catch (err) {
         logger.error(err.message);
-        res.status(400).json({
+        return res.status(400).json({
             error: err.message,
         });
     }

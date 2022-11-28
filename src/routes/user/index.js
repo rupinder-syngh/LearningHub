@@ -1,51 +1,45 @@
 const router = require('express').Router();
 const { body, param } = require('express-validator');
+const { inputValidators } = require('../../../config/constants');
 
 const { signup, verifyEmail } = require('./signup');
 const signin = require('./signin');
 const { forgotPassword, resetPassword } = require('./forgotPassword');
+const apiInputValidator = require('../../utils/apiInputValidator');
 
 const signupValidator = [
-    body('firstName').exists().withMessage('firstName is required').trim()
-        .isString()
-        .withMessage('must be a string')
-        .isLength({ min: 2, max: 20 })
-        .withMessage('length should be b/w 2 and 20'),
-    body('lastName').optional().trim().isString()
-        .withMessage('must be a string')
-        .isLength({ min: 2, max: 20 })
-        .withMessage('length should be b/w 2 and 20'),
-    body('email').exists().withMessage('email is required').trim()
-        .isEmail()
-        .withMessage('should be a valid email'),
-    body('password').exists().withMessage('password is required').trim()
-        .isString()
-        .withMessage('should be a string')
-        .isLength({ min: 8 })
-        .withMessage('password should be minimum 8 chars long'),
+    inputValidators.firstName,
+    inputValidators.lastName,
+    inputValidators.email,
+    inputValidators.password,
 ];
 
 const signinValidator = [
-    body('email').exists().withMessage('email is required').trim()
-        .isEmail()
-        .withMessage('should be a valid email')
-        .trim(),
-    body('password').exists().withMessage('password is required').trim()
-        .isString()
-        .withMessage('should be a string')
-        .isLength({ min: 8 })
-        .withMessage('password should be minimum 8 chars long')
-        .trim(),
+    inputValidators.email,
+    inputValidators.password,
 ];
 
 const verifyEmailValidator = [
-    param('token').exists().withMessage('token is required').trim(),
+    param('token').exists().withMessage('token is required').trim()
+        .isString()
+        .withMessage('should be a string'),
 ];
 
-router.post('/signup', signupValidator, signup);
-router.get('/verifyEmail/:token', verifyEmailValidator, verifyEmail);
-router.post('/signin', signinValidator, signin);
-router.post('/forgotPassword', forgotPassword);
-router.post('/resetPassword', resetPassword);
+const forgotPasswordValidator = [
+    inputValidators.email,
+];
+
+const resetPasswordValidator = [
+    body('token').exists().withMessage('token is required').trim()
+        .isString()
+        .withMessage('should be a string'),
+    inputValidators.password,
+];
+
+router.post('/signup', signupValidator, apiInputValidator, signup);
+router.get('/verifyEmail/:token', verifyEmailValidator, apiInputValidator, verifyEmail);
+router.post('/signin', signinValidator, apiInputValidator, signin);
+router.post('/forgotPassword', forgotPasswordValidator, apiInputValidator, forgotPassword);
+router.post('/resetPassword', resetPasswordValidator, apiInputValidator, resetPassword);
 
 module.exports = router;
