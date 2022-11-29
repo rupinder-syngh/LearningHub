@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { body, param } = require('express-validator');
 const { inputValidators } = require('../../../config/constants');
 
 const { signup, verifyEmail } = require('./signup');
@@ -20,9 +19,7 @@ const signinValidator = [
 ];
 
 const verifyEmailValidator = [
-    param('token').exists().withMessage('token is required').trim()
-        .isString()
-        .withMessage('should be a string'),
+    inputValidators['token-param'],
 ];
 
 const forgotPasswordValidator = [
@@ -30,9 +27,7 @@ const forgotPasswordValidator = [
 ];
 
 const resetPasswordValidator = [
-    body('token').exists().withMessage('token is required').trim()
-        .isString()
-        .withMessage('should be a string'),
+    inputValidators['token-body'],
     inputValidators.password,
 ];
 

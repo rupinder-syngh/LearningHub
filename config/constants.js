@@ -1,7 +1,7 @@
 const verifyEmailLink = "http://localhost:3000/user/verifyEmail/";
 const resetPasswordLink = "http://localhost:3000/user/resetPassword/";
 const { from: emailFromId } = require('config').get('Server').email;
-const { body } = require('express-validator');
+const { body, param } = require('express-validator');
 
 module.exports = {
     "email": {
@@ -43,6 +43,12 @@ module.exports = {
                      .withMessage('should be a string')
                      .isLength({ min: 8 })
                      .withMessage('password should be minimum 8 chars long')
-                     .trim()
+                     .trim(),
+        "token-body": body('token').exists().withMessage('token is required').trim()
+                      .isString()
+                      .withMessage('should be a string'),
+        "token-param": param('token').exists().withMessage('token is required').trim()
+                      .isString()
+                      .withMessage('should be a string'),                                    
     }
 }

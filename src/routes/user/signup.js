@@ -13,7 +13,8 @@ const signup = async (req, res) => {
         const passwordHash = await bcrypt.hash(userData.password, 10);
         userData.password = passwordHash;
         userData.emailVerificationToken = await getUuid();
-        userData.savedUser = await User.create(userData);
+        const userToSave = new User(userData);
+        userData.savedUser = await userToSave.save();
 
         /* Info: email integration */
         const emailMsg = constants.email.verifyEmail(
