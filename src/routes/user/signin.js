@@ -1,18 +1,10 @@
 const bcrypt = require('bcrypt');
-const { validationResult } = require('express-validator');
 const User = require('../../models/user');
 const { getAccessToken } = require('./authService');
 const logger = require('../../utils/logger');
 
 const signin = async (req, res) => {
     try {
-    /* Info: input validation */
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            logger.error({ errors: errors.array() });
-            return res.status(400).json({ errors: errors.array() });
-        }
-
         /* Info: check user credentials */
         const { email, password } = req.body;
         const userData = await User.findOne({ email });

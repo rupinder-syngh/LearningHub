@@ -3,6 +3,7 @@ const User = require('../../models/user');
 const getUuid = require('../../utils/getUuid');
 const sendEmail = require('../../services/sendEmail');
 const constants = require('../../../config/constants');
+const logger = require('../../utils/logger');
 
 const forgotPassword = async (req, res) => {
     try {
@@ -23,6 +24,7 @@ const forgotPassword = async (req, res) => {
             data: {},
         });
     } catch (err) {
+        logger.error(err.message);
         return res.status(400).json({
             error: err.message,
         });
@@ -39,6 +41,7 @@ const resetPassword = async (req, res) => {
             data: {},
         });
     } catch (err) {
+        logger.error(err.message);
         return res.status(400).json({
             error: err.message,
         });
