@@ -2,7 +2,7 @@
     "Server": {
         "port": 3001,
         "db": {
-            "url": "mongodb://127.0.0.1:27017/learninghub"
+            "url": "mongodb+srv://rupinder:EBa4Z67rE66XEBC@cluster0.czevj72.mongodb.net/learninghub"
         },
         "email": {
             "from": "rupinder.singh@thewitslab.com"
