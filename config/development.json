@@ -1,6 +1,6 @@
 {
     "Server": {
-        "port": 3000,
+        "port": 3002,
         "db": {
             "url": "mongodb+srv://rupinder:EBa4Z67rE66XEBC@cluster0.czevj72.mongodb.net/learninghub"
         },
