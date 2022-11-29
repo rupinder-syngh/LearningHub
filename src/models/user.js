@@ -10,7 +10,7 @@ const userSchema = new Schema({
     forgotPasswordToken: { type: String },
 }, { timestamps: true });
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function checkForDupEmail(next) {
     const userFound = await this.collection.findOne({ email: this.email });
     if (userFound) {
         throw new Error('User already exists with this email Id');
