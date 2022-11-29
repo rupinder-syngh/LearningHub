@@ -35,7 +35,7 @@ describe('user testing suit', () => {
         };
 
         const userToSave = new User(userData);
-        await expect(userToSave.save()).to.be.rejectedWith(/`firstName` is required/);
+        await expect(userToSave.save()).to.be.rejectedWith('firstName is required');
     });
 
     it('should throw if email is missing', async () => {
@@ -46,7 +46,7 @@ describe('user testing suit', () => {
         };
 
         const userToSave = new User(userData);
-        await expect(userToSave.save()).to.be.rejectedWith(/`email` is required/);
+        await expect(userToSave.save()).to.be.rejectedWith('email is required');
     });
 
     it('should throw if password is missing', async () => {
@@ -57,7 +57,7 @@ describe('user testing suit', () => {
         };
 
         const userToSave = new User(userData);
-        await expect(userToSave.save()).to.be.rejectedWith(/`password` is required/);
+        await expect(userToSave.save()).to.be.rejectedWith('password is required');
     });
 
     it('should throw if email is duplicate', async () => {
@@ -71,6 +71,6 @@ describe('user testing suit', () => {
         const userToSave1 = new User(userData);
         const userToSave2 = new User(userData);
         await userToSave1.save();
-        await expect(userToSave2.save()).to.be.rejectedWith(/email_1 dup key/);
+        await expect(userToSave2.save()).to.be.rejectedWith('User already exists with this email Id');
     });
 });
