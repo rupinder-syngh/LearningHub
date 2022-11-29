@@ -1,6 +1,7 @@
-const verifyEmailLink = "http://localhost:3000/user/verifyEmail/";
-const resetPasswordLink = "http://localhost:3000/user/resetPassword/";
-const { from: emailFromId } = require('config').get('Server').email;
+const serverConfig = require('config').get('Server');
+const verifyEmailLink = `${serverConfig.host}/user/verifyEmail/`;
+const resetPasswordLink = `${serverConfig.host}/user/resetPassword/`;
+const { from: emailFromId } = serverConfig.email;
 const { body, param } = require('express-validator');
 
 module.exports = {

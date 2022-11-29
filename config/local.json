@@ -1,6 +1,7 @@
 {
     "Server": {
         "port": 3000,
+        "host": "https://different-tiara-bat.cyclic.app",
         "db": {
             "url": "mongodb+srv://rupinder:EBa4Z67rE66XEBC@cluster0.czevj72.mongodb.net/learninghub"
         },
