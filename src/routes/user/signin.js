@@ -27,8 +27,10 @@ const signin = async (req, res) => {
         });
 
         return res.status(200).json({
-            message: 'signin successful',
-            data: { accessToken },
+            message: 'Signin successful',
+            data: {
+                firstName: userData.firstName, lastName: userData.lastName || '', email: userData.email, accessToken,
+            },
         });
     } catch (err) {
         logger.error(err.message);

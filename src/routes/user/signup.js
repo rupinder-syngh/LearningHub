@@ -3,7 +3,6 @@ const User = require('../../models/user');
 const getUuid = require('../../utils/getUuid');
 const sendEmail = require('../../services/sendEmail');
 const constants = require('../../../config/constants');
-const { getAccessToken } = require('./authService');
 const logger = require('../../utils/logger');
 
 const signup = async (req, res) => {
@@ -23,16 +22,10 @@ const signup = async (req, res) => {
         );
         sendEmail(emailMsg);
 
-        /* Info: get jwt */
-        const accessToken = await getAccessToken({
-            id: userData.savedUser._id, // eslint-disable-line no-underscore-dangle
-            firstName: userData.firstName,
-        });
-
         logger.info('user created successfully');
         return res.status(200).json({
             message: 'Signup successful',
-            data: { accessToken },
+            data: {},
         });
     } catch (err) {
         logger.error(err.message);

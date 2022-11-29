@@ -7,7 +7,6 @@ const logger = require('../../utils/logger');
 
 const forgotPassword = async (req, res) => {
     try {
-        logger.info(req);
         const { email } = req.body;
         const userData = await User.findOne({ email });
         if (!userData) {
