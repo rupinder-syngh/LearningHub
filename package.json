@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./src/**/*.test.js && exit 1",
-    "start": "eslint --fix './src/**/*.js' && node ./src/index.js",
-    "vercel-build": "node ./src/index.js"
+    "start": "node ./src/index.js"
   },
   "author": "Rupinder Singh",
   "license": "ISC",

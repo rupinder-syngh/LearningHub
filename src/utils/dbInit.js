@@ -5,7 +5,7 @@ const dbConfig = config.get('Server.db');
 
 const connectToDb = async () => {
     try {
-        return await mongoose.connect(`mongodb://${dbConfig.host}:${dbConfig.port}/${dbConfig.dbName}`);
+        return await mongoose.connect(`${dbConfig.url}`);
     } catch (err) {
         throw new Error(err);
     }
