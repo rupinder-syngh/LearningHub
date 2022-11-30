@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
-const { expiresIn } = require('config').get('Server').get('jwt');
 require('dotenv').config();
+const { expiresIn } = require('config').get('Server').get('jwt');
+const logger = require('../../utils/logger');
 
 const getAccessToken = async (payload) => {
     try {
@@ -10,11 +11,15 @@ const getAccessToken = async (payload) => {
     }
 };
 
-const verifyAccessToken = async (accessToken) => {
+const verifyAccessToken = async (req, res, next) => {
     try {
-        return jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
+        req.headers.userPayload = jwt.verify(`${req.headers.authorization.split(' ')[1]}`, process.env.JWT_SECRET_KEY);
+        return next();
     } catch (err) {
-        throw new Error(err.message);
+        logger.error(err.message);
+        return res.status(401).json({
+            error: err.message,
+        });
     }
 };
 

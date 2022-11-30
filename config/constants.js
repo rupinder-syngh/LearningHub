@@ -2,7 +2,7 @@ const serverConfig = require('config').get('Server');
 const verifyEmailLink = `${serverConfig.host}/user/verifyEmail/`;
 const resetPasswordLink = `${serverConfig.host}/user/resetPassword/`;
 const { from: emailFromId } = serverConfig.email;
-const { body, param } = require('express-validator');
+const { body, param, header } = require('express-validator');
 
 module.exports = {
     "email": {
@@ -50,6 +50,22 @@ module.exports = {
                       .withMessage('should be a string'),
         "token-param": param('token').exists().withMessage('token is required').trim()
                       .isString()
-                      .withMessage('should be a string'),                                    
+                      .withMessage('should be a string'),
+        "auth":       header('authorization').exists().withMessage('authorization is required').trim()
+                      .isString()
+                      .withMessage('must be a string')
+                      .matches(/^Bearer ((?:\.?(?:[A-Za-z0-9-_]+)){3})$/gm)
+                      .withMessage('Invalid authorization'),
+        "post-title": body('title').exists().withMessage('title is required').trim()
+                      .isString()
+                      .withMessage('must be a string')
+                      .isLength({ min: 10, max: 100 })
+                      .withMessage('length should be b/w 10 and 100'),
+        "post-body":  body('body').exists().withMessage('body is required').trim()
+                      .isString()
+                      .withMessage('must be a string')
+                      .isLength({ min: 1000 })
+                      .withMessage('post content should be minimum 1000 chars long'),              
+
     }
 }
