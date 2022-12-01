@@ -1,6 +1,7 @@
 const { S3Client } = require('@aws-sdk/client-s3');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
+const logger = require('../utils/logger');
 require('dotenv').config();
 
 const s3 = new S3Client({
@@ -8,6 +9,8 @@ const s3 = new S3Client({
     secretAccessKey: `${process.env.AWS_SECRET_ACCESS_KEY}`,
     region: `${process.env.AWS_REGION}`,
 });
+
+console.log('process env: ', process.env);
 
 const uploadToS3 = multer({
     storage: multerS3({
