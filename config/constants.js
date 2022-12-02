@@ -2,7 +2,7 @@ const serverConfig = require('config').get('Server');
 const verifyEmailLink = `${serverConfig.host}/user/verifyEmail/`;
 const resetPasswordLink = `${serverConfig.host}/user/resetPassword/`;
 const { from: emailFromId } = serverConfig.email;
-const { body, param, header } = require('express-validator');
+const { body, param, header, query } = require('express-validator');
 
 module.exports = {
     "email": {
@@ -65,7 +65,12 @@ module.exports = {
                       .isString()
                       .withMessage('must be a string')
                       .isLength({ min: 1000 })
-                      .withMessage('post content should be minimum 1000 chars long'),              
+                      .withMessage('post content should be minimum 1000 chars long'),
+        "skip":       query('skip').optional().trim().isInt({ min: 0 })
+                      .withMessage('should be a postive integer'),
+        "post-id":         param('id').exists().withMessage('post id is required').trim()
+                      .isString()
+                      .withMessage('should be a string'),                                          
 
     }
 }

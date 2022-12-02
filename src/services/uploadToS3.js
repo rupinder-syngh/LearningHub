@@ -10,8 +10,6 @@ const s3 = new S3Client({
     sessionToken: process.env.AWS_SESSION_TOKEN,
 });
 
-console.log('process env: ', process.env);
-
 const uploadToS3 = multer({
     storage: multerS3({
         acl: 'public-read',
