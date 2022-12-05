@@ -6,7 +6,9 @@ const getPosts = async (req, res) => {
         const { skip: postsToSkip } = req.query;
         const posts = await Post.find({}, {
             title: 1, author: 1, likes: 1, createdAt: 1,
-        }).populate('author', { firstName: 1, lastName: 1, _id: 0 }).sort({ createdAt: -1 }).limit(10)
+        })
+            .populate('author', { firstName: 1, lastName: 1, _id: 0 })
+            .sort({ createdAt: -1 }).limit(10)
             .skip(postsToSkip);
         return res.status(200).json({
             message: 'Success',

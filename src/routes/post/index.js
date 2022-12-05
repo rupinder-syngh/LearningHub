@@ -9,6 +9,7 @@ const imageUpload = require('./imageUpload');
 const getPosts = require('./getPosts');
 const getPost = require('./getPost');
 
+/* Info: Input validators */
 const createPostValidator = [
     inputValidators.auth,
     inputValidators['post-title'],
@@ -24,6 +25,7 @@ const getPostValidator = [
     inputValidators['post-id'],
 ];
 
+/* Info: Routes */
 router.post('/create', createPostValidator, apiInputValidator, verifyAccessToken, createPost);
 router.post('/imageUpload', uploadToS3, imageUpload);
 router.get('/list', getPostsValidator, apiInputValidator, getPosts);

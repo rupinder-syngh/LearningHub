@@ -9,7 +9,7 @@ const Post = require('./post');
 
 chai.use(chaiAsPromised);
 
-describe('post testing suit', () => {
+describe('Post testing suit', () => {
     before(async () => {
         await connectToDb();
     });
@@ -23,7 +23,7 @@ describe('post testing suit', () => {
         const postToSave = new Post(postData);
         const savedPost = await postToSave.save();
         expect(savedPost).to.exist; // eslint-disable-line no-unused-expressions
-        expect(savedPost.firstName).to.be.equal(postData.firstName);
+        expect(savedPost.title).to.be.equal(postData.title);
     });
 
     it('should throw if title is missing', async () => {

@@ -9,7 +9,7 @@ const User = require('./user');
 
 chai.use(chaiAsPromised);
 
-describe('user testing suit', () => {
+describe('User testing suit', () => {
     before(async () => {
         await connectToDb();
     });
