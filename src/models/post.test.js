@@ -19,6 +19,7 @@ describe('Post testing suit', () => {
             title: faker.name.jobTitle(),
             body: faker.random.words(1000),
             author: faker.database.mongodbObjectId(),
+            images: [faker.internet.url(), faker.internet.url()],
         };
         const postToSave = new Post(postData);
         const savedPost = await postToSave.save();
@@ -30,6 +31,7 @@ describe('Post testing suit', () => {
         const postData = {
             body: faker.name.jobDescriptor(),
             author: faker.database.mongodbObjectId(),
+            images: [faker.internet.url(), faker.internet.url()],
         };
 
         const postToSave = new Post(postData);
@@ -40,6 +42,7 @@ describe('Post testing suit', () => {
         const postData = {
             title: faker.name.jobTitle(),
             author: faker.database.mongodbObjectId(),
+            images: [faker.internet.url(), faker.internet.url()],
         };
 
         const postToSave = new Post(postData);
@@ -50,6 +53,7 @@ describe('Post testing suit', () => {
         const postData = {
             title: faker.name.jobTitle(),
             body: faker.name.jobDescriptor(),
+            images: [faker.internet.url(), faker.internet.url()],
         };
 
         const postToSave = new Post(postData);
