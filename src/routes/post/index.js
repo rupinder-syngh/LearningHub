@@ -5,7 +5,7 @@ const apiInputValidator = require('../../utils/apiInputValidator');
 const { verifyAccessToken } = require('../user/authService');
 const uploadToS3 = require('../../services/uploadToS3');
 
-const upload = multer({ dest: '../temp' });
+const upload = multer({ dest: '.' });
 const multerUpload = upload.fields([{ name: 'image', maxCount: 1 }]);
 
 const createPost = require('./createPost');
