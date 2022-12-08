@@ -1,4 +1,5 @@
 const cloudinary = require('cloudinary').v2;
+const streamifier = require('streamifier');
 const logger = require('../utils/logger');
 require('dotenv').config();
 
@@ -8,11 +9,24 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const uploadImage = async (filePath, fileName) => {
+const uploadImage = async (filePath) => {
     try {
-        const result = await cloudinary.uploader.upload(filePath, { public_id: fileName });
-        logger.info(JSON.stringify(result.url));
-        return result.url;
+        return new Promise((resolve, reject) => {
+            const cloudUploadStream = cloudinary.uploader.upload_stream(
+                {
+                    folder: process.env.CLOUDINARY_DIR_NAME,
+                },
+                (error, result) => {
+                    if (result) {
+                        resolve(result.url);
+                    } else {
+                        reject(error);
+                    }
+                },
+            );
+
+            streamifier.createReadStream(filePath).pipe(cloudUploadStream);
+        });
     } catch (err) {
         logger.error(err.message);
         throw new Error(err.message);
