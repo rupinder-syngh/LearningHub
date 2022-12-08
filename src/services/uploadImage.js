@@ -11,6 +11,7 @@ cloudinary.config({
 
 const uploadImage = async (filePath) => {
     try {
+        logger.info('cloud creds: ', { cldKey: process.env.CLOUDINARY_API_KEY, cldSecret: process.env.CLOUDINARY_API_SECRET });
         return new Promise((resolve, reject) => {
             const cloudUploadStream = cloudinary.uploader.upload_stream(
                 {

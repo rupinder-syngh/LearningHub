@@ -3,7 +3,6 @@ const uploadImageToCloud = require('../../services/uploadImage');
 
 const uploadImage = async (req, res) => {
     try {
-        logger.info(JSON.stringify(req?.files));
         const imageUrl = await uploadImageToCloud(req?.files?.image[0]?.buffer);
         res.status(200).json({
             message: 'file uploaded successfully',
