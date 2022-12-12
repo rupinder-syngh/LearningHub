@@ -3,6 +3,7 @@ const { Schema, default: mongoose } = require('mongoose');
 const postSchema = new Schema({
     title: { type: String, required: [true, 'title is required'] },
     body: { type: String, required: [true, 'body is required'] },
+    bodyHead: { type: String },
     images: [{ type: String }],
     author: { type: mongoose.Types.ObjectId, ref: 'User', required: [true, 'author is required'] },
     likes: { type: Number, default: 0 },

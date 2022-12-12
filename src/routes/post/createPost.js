@@ -6,6 +6,7 @@ const createPost = async (req, res) => {
         /* Info: Post creation */
         const postData = req.body;
         postData.author = req.headers?.userPayload?.id;
+        postData.bodyHead = postData.body.slice(0, 100);
         const postToSave = new Post(postData);
         postData.savedPost = await postToSave.save();
 
