@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const { resolve } = require('path');
 const User = require('../../models/user');
 const getUuid = require('../../utils/getUuid');
 const sendEmail = require('../../services/sendEmail');
@@ -44,10 +45,7 @@ const verifyEmail = async (req, res) => {
         } else {
             await User.updateOne({ emailVerificationToken: token }, { $set: { isVerified: true } });
         }
-        return res.status(200).json({
-            message: 'Email verified successfully!',
-            data: {},
-        });
+        return res.status(200).sendFile(resolve('./src/templates/emailVerified.html'));
     } catch (err) {
         logger.error(err.message);
         return res.status(400).json({
