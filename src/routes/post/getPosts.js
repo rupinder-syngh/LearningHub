@@ -4,6 +4,7 @@ const Post = require('../../models/post');
 const getPosts = async (req, res) => {
     try {
         const { skip: postsToSkip } = req.query;
+        const postCount = await Post.find({}).count();
         const posts = await Post.find({}, {
             title: 1, bodyHead: 1, author: 1, images: 1, likes: 1, createdAt: 1,
         })
@@ -12,7 +13,7 @@ const getPosts = async (req, res) => {
             .skip(postsToSkip);
         return res.status(200).json({
             message: 'Success',
-            data: posts,
+            data: { postCount, posts },
         });
     } catch (err) {
         logger.error(err.message);
