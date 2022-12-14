@@ -6,7 +6,7 @@ const getPosts = async (req, res) => {
         const { skip: postsToSkip } = req.query;
         const postCount = await Post.find({}).count();
         const posts = await Post.find({}, {
-            title: 1, bodyHead: 1, body: 1, author: 1, images: 1, likes: 1, createdAt: 1,
+            title: 1, bodyHead: 1, author: 1, images: 1, likes: 1, createdAt: 1,
         })
             .populate('author', { firstName: 1, lastName: 1, _id: 0 })
             .sort({ createdAt: -1 }).limit(10)
