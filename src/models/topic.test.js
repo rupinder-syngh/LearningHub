@@ -17,9 +17,8 @@ describe('Topic testing suit', () => {
     it('should create a topic successfully', async () => {
         const topicData = {
             title: faker.name.jobTitle(),
-            content: [{ name: faker.name.firstName(), description: faker.random.words(100) }],
             duration: faker.name.firstName(),
-            course: faker.database.mongodbObjectId(),
+            courseId: faker.database.mongodbObjectId(),
         };
         const topicToSave = new Topic(topicData);
         const savedTopic = await topicToSave.save();
@@ -29,9 +28,8 @@ describe('Topic testing suit', () => {
 
     it('should throw if title is missing', async () => {
         const topicData = {
-            content: [{ name: faker.name.firstName(), description: faker.random.words(100) }],
             duration: faker.name.firstName(),
-            course: faker.database.mongodbObjectId(),
+            courseId: faker.database.mongodbObjectId(),
         };
 
         const topicToSave = new Topic(topicData);
@@ -41,8 +39,7 @@ describe('Topic testing suit', () => {
     it('should throw if duration is missing', async () => {
         const topicData = {
             title: faker.name.jobTitle(),
-            content: [{ name: faker.name.firstName(), description: faker.random.words(100) }],
-            course: faker.database.mongodbObjectId(),
+            courseId: faker.database.mongodbObjectId(),
         };
 
         const topicToSave = new Topic(topicData);

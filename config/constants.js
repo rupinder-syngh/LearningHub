@@ -68,9 +68,10 @@ module.exports = {
                       .withMessage('post content should be minimum 1000 chars long'),
         "skip":       query('skip').optional().trim().isInt({ min: 0 })
                       .withMessage('should be a postive integer'),
-        "post-id":         param('id').exists().withMessage('post id is required').trim()
+        "post-id":     param('id').exists().withMessage('post id is required').trim()
                       .isString()
-                      .withMessage('should be a string'),                                          
+                      .withMessage('should be a string'),
+        "category":    query('category').optional().trim().isIn(['NODEJS','REACTJS','REACTNATIVE','PYTHON']).withMessage('invalid category')                                                       
 
     }
 }

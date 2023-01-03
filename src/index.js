@@ -6,6 +6,7 @@ const config = require('config');
 const serverConfig = config.get('Server');
 const userRoute = require('./routes/user');
 const postRoute = require('./routes/post');
+const courseRoute = require('./routes/course');
 const { connectToDb } = require('./utils/dbInit');
 const logger = require('./utils/logger');
 require('dotenv').config();
@@ -17,6 +18,7 @@ app.use(cors());
 
 app.use('/user', userRoute);
 app.use('/post', postRoute);
+app.use('/course', courseRoute);
 app.get('/', (req, res) => {
     res.send('This is the home page of user');
 });
