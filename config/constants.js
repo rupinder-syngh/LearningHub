@@ -71,7 +71,8 @@ module.exports = {
         "post-id":     param('id').exists().withMessage('post id is required').trim()
                       .isString()
                       .withMessage('should be a string'),
-        "category":    query('category').optional().trim().isIn(['NODEJS','REACTJS','REACTNATIVE','PYTHON']).withMessage('invalid category')                                                       
-
+        "category":    query('category').optional().trim().isIn(['NODEJS','REACTJS','REACTNATIVE','PYTHON']).withMessage('invalid category'),                                                       
+        "courseId":    query('courseId').exists().withMessage('course Id is required').trim().isMongoId().withMessage('invalid id'),
+        "topicId":     query('topicId').exists().withMessage('topic Id is required').trim().isMongoId().withMessage('invalid id')
     }
 }
