@@ -11,7 +11,7 @@ https://learning-hub-fe.vercel.app/
 - [About The Project](#about-the-project)
 - [Technologies](#technologies)
 - [Status](#status)
-- [Credits](#credits)
+- [Team members](#team-members)
 
 ## About The App
 
