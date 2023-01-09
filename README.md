@@ -11,6 +11,7 @@ https://learning-hub-fe.vercel.app/
 - [About The Project](#about-the-project)
 - [Technologies](#technologies)
 - [Status](#status)
+- [Building the project](#building-the-project)
 - [Team members](#team-members)
 
 ## About The App
@@ -41,6 +42,10 @@ Features yet to be built:
 - Post comments
 - Course subscription
 - Assessment module
+
+## Building the project
+- npm install
+- npm run start
 
 ## Team members
 
