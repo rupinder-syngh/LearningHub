@@ -1,4 +1,5 @@
 const Course = require('../../models/course');
+const logger = require('../../utils/logger');
 
 const getCourses = async (req, res) => {
     try {
@@ -16,6 +17,7 @@ const getCourses = async (req, res) => {
             },
         });
     } catch (err) {
+        logger.error(err.message);
         return res.status(400).json({
             error: err.message,
         });

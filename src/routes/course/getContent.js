@@ -1,4 +1,5 @@
 const Content = require('../../models/content');
+const logger = require('../../utils/logger');
 
 const getContent = async (req, res) => {
     try {
@@ -11,6 +12,7 @@ const getContent = async (req, res) => {
             },
         });
     } catch (err) {
+        logger.error(err.message);
         return res.status(400).json({
             error: err.message,
         });

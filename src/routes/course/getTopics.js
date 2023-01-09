@@ -1,4 +1,5 @@
 const Topic = require('../../models/topic');
+const logger = require('../../utils/logger');
 
 const getTopics = async (req, res) => {
     try {
@@ -11,6 +12,7 @@ const getTopics = async (req, res) => {
             },
         });
     } catch (err) {
+        logger.error(err.message);
         return res.status(400).json({
             error: err.message,
         });

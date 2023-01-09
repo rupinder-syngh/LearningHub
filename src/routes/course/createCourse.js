@@ -1,4 +1,5 @@
 const Course = require('../../models/course');
+const logger = require('../../utils/logger');
 
 const createCourse = async (req, res) => {
     try {
@@ -13,6 +14,7 @@ const createCourse = async (req, res) => {
             data: { id: course._id }, // eslint-disable-line no-underscore-dangle
         });
     } catch (err) {
+        logger.error(err.message);
         return res.status(400).json({
             error: err.message,
         });
