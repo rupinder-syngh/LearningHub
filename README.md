@@ -1,4 +1,4 @@
-#LearningHub
+## LearningHub
 
 A centralised platform for learning, sharing and assessment.
 
